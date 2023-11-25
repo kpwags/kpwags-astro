@@ -1,0 +1,238 @@
+<div id="settings-drawer" class="settings-drawer">
+    <button id="close" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+    <div class="theme-section">
+        <label>Mode</label>
+        <div class="theme-options">
+            <button type="button" title="system" data-mode="system" class="mode-button"> System</button>
+            <button type="button" title="light" data-mode="light" class="mode-button"> Light</button>
+            <button type="button" title="dark" data-mode="dark" class="mode-button"> Dark</button>
+        </div>
+    </div>
+    <div class="theme-section">
+        <label>Color</label>
+        <div class="color-options">
+            <button type="button" title="red" data-color="red" class="color-button"> &nbsp;</button>
+            <button type="button" title="orange" data-color="orange" class="color-button"> &nbsp;</button>
+            <button type="button" title="green" data-color="green" class="color-button"> &nbsp;</button>
+            <button type="button" title="blue" data-color="blue" class="color-button"> &nbsp;</button>
+            <button type="button" title="purple" data-color="purple" class="color-button"> &nbsp;</button>
+        </div>
+    </div>
+    <div class="theme-section">
+        <label>Width</label>
+        <div class="theme-options">
+            <button type="button" title="Set page width to slim" data-width="slim" class="width-button">Slim</button>
+            <button type="button" title="Set page width to normal" data-width="normal" class="width-button">Normal</button>
+            <button type="button" title="Set page width to wide" data-width="wide" class="width-button">Wide</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .settings-drawer {
+        display: none;
+        position: absolute;
+        z-index: 100;
+        width: 640px;
+        top: 0;
+        left: 50%;
+        margin-left: -320px;
+        background: var(--background);
+        box-shadow: var(--box-shadow);
+        padding: 20px;
+    }
+
+    @media (max-width: 680px) {
+        .settings-drawer {
+            width: 320px;
+            margin-left: -160px;
+        }
+    }
+
+    button#close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        height: 32px;
+        width: 32px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    button#close svg {
+        stroke: var(--text);
+    }
+
+    .theme-section {
+        margin-bottom: 16px;
+    }
+
+    .theme-section:last-of-type {
+        margin-bottom: 0;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .color-options {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .mode-button,
+    .width-button {
+        padding-left: 12px;
+        padding-right: 12px;
+        border: 1px solid var(--text);
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .color-button {
+        justify-content: center;
+        width: 19%;
+    }
+
+    .mode-button.active,
+    .width-button.active {
+        border: 3px solid var(--primary-color-1);
+    }
+
+    .color-button.active {
+        border: 5px solid var(--black-1);
+        box-sizing: border-box;
+    }
+
+    button[data-color='red'] {
+        border-color: var(--primary-color-red);
+        background: var(--primary-color-red);
+    }
+
+    button[data-color='orange'] {
+        border-color: var(--primary-color-orange);
+        background: var(--primary-color-orange);
+    }
+
+    button[data-color='green'] {
+        border-color: var(--primary-color-green);
+        background: var(--primary-color-green);
+    }
+
+    button[data-color='blue'] {
+        border-color: var(--primary-color-blue);
+        background: var(--primary-color-blue);
+    }
+
+    button[data-color='purple'] {
+        border-color: var(--primary-color-purple);
+        background: var(--primary-color-purple);
+    }
+</style>
+
+<script>
+    import { changeColor, changeMode, changeWidth, getCurrentTheme } from '@lib/ConfigUtils';
+    import type { ColorTheme, PageWidth, Theme } from '@models/Theme';
+
+    const colorButtons = document.querySelectorAll('button.color-button');
+    const modeButtons = document.querySelectorAll('button.mode-button');
+    const widthButtons = document.querySelectorAll('button.width-button');
+
+    colorButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const btn = e.target as HTMLButtonElement;
+
+            const color = btn.getAttribute('data-color') as ColorTheme;
+
+            removeActiveColor();
+
+            btn.classList.add('active');
+
+            changeColor(color);
+        });
+    });
+
+    modeButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const btn = e.target as HTMLButtonElement;
+
+            const mode = btn.getAttribute('data-mode') as Theme;
+
+            removeActiveMode();
+
+            btn.classList.add('active');
+
+            changeMode(mode);
+        });
+    });
+
+    widthButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const btn = e.target as HTMLButtonElement;
+
+            const width = btn.getAttribute('data-width') as PageWidth;
+
+            removeActiveWidth();
+
+            btn.classList.add('active');
+
+            changeWidth(width);
+        });
+    });
+
+    const removeActiveColor = () => {
+        const colorButtons = document.querySelectorAll('button.color-button');
+
+        colorButtons.forEach((button) => {
+            button.classList.remove('active');
+        });
+    };
+
+    const removeActiveMode = () => {
+        const colorButtons = document.querySelectorAll('button.mode-button');
+
+        colorButtons.forEach((button) => {
+            button.classList.remove('active');
+        });
+    };
+
+    const removeActiveWidth = () => {
+        const widthButtons = document.querySelectorAll('button.width-button');
+
+        widthButtons.forEach((button) => {
+            button.classList.remove('active');
+        });
+    };
+
+    window.addEventListener('load', () => {
+        const [mode, color, width] = getCurrentTheme();
+
+        const modeButton = document.querySelector(`button[data-mode="${mode}"]`);
+        if (modeButton) {
+            modeButton.classList.add('active');
+        }
+
+        const colorButton = document.querySelector(`button[data-color="${color}"]`);
+        if (colorButton) {
+            colorButton.classList.add('active');
+        }
+
+        const widthButton = document.querySelector(`button[data-width="${width}"]`);
+        if (widthButton) {
+            widthButton.classList.add('active');
+        }
+
+        const closeButton = document.getElementById('close');
+        if (closeButton) {
+            closeButton.addEventListener('click', () => {
+                const drawer = document.querySelector('.settings-drawer') as HTMLDivElement;
+                drawer.style.display = 'none';
+            });
+        }
+    });
+</script>

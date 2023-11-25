@@ -1,0 +1,220 @@
+:root {
+    --background: hsl(0, 0%, 100%);
+    --text: hsl(0, 0%, 15%);
+    --white-1: hsl(0, 0%, 100%);
+    --white-2: hsl(0, 0%, 90%);
+    --black-1: hsl(0, 0%, 9%);
+    --black-2: hsl(0, 0%, 15%);
+    --black-3: hsl(0, 0%, 20%);
+    --grey-1: hsl(0, 0%, 69%);
+    --grey-2: hsl(0, 0%, 39%);
+    --font: Inconsolata, monospace;
+    --primary-color-1: hsl(144, 100%, 15%);
+    --primary-color-2: hsl(142, 68%, 29%);
+    --primary-color-3: hsl(124, 95%, 32%);
+    --box-shadow: 0 12px 24px 0 hsla(0, 0%, 0%, 0.2);
+    --meta: hsl(0, 0%, 20%);
+    --photoset-list-bg: var(--white-2);
+    --photoset-list-hover-bg: var(--grey-1);
+    --display-light-mode: inline;
+    --display-dark-mode: none;
+    --primary-color-red: rgb(212, 34, 34);
+    --primary-color-orange: hsl(30, 100%, 33%);
+    --primary-color-green: hsl(144, 100%, 15%);
+    --primary-color-blue: rgb(28, 55, 189);
+    --primary-color-purple: hsl(301, 91%, 40%);
+    --width: min(80ch, 100vw - 2rem);
+}
+
+[data-theme*='dark'] {
+    --background: hsl(0, 0%, 14%);
+    --text: hsl(0, 0%, 94%);
+    --primary-color-1: hsl(124, 95%, 38%);
+    --primary-color-2: hsl(124, 100%, 40%);
+    --primary-color-3: hsl(124, 95%, 32%);
+    --meta: hsl(0, 0%, 89%);
+    --photoset-list-bg: hsl(0, 0%, 36%);
+    --photoset-list-hover-bg: hsl(0, 0%, 15%);
+    --display-light-mode: none;
+    --display-dark-mode: inline;
+    --primary-color-red: rgb(212, 34, 34);
+    --primary-color-orange: hsl(30, 79%, 46%);
+    --primary-color-green: hsl(124, 95%, 38%);
+    --primary-color-blue: hsl(213 100% 66%);
+    --primary-color-purple: hsl(301, 99%, 65%);
+    --box-shadow: 0 12px 24px 0 hsla(0, 0%, 36%, 0.2);
+}
+
+[data-theme*='light'] {
+    --background: hsl(0, 0%, 100%);
+    --text: hsl(0, 0%, 15%);
+    --white-1: hsl(0, 0%, 100%);
+    --white-2: hsl(0, 0%, 90%);
+    --black-1: hsl(0, 0%, 9%);
+    --black-2: hsl(0, 0%, 15%);
+    --black-3: hsl(0, 0%, 20%);
+    --grey-1: hsl(0, 0%, 69%);
+    --grey-2: hsl(0, 0%, 39%);
+    --primary-color-1: hsl(144, 100%, 15%);
+    --primary-color-2: rgb(24, 124, 61);
+    --primary-color-3: hsl(124, 95%, 32%);
+    --box-shadow: 0 12px 24px 0 hsla(0, 0%, 0%, 0.2);
+    --meta: hsl(0, 0%, 20%);
+    --photoset-list-bg: var(--white-2);
+    --photoset-list-hover-bg: var(--grey-1);
+    --display-light-mode: inline;
+    --display-dark-mode: none;
+    --primary-color-red: hsl(0 100% 67%);
+    --primary-color-orange: hsl(30, 100%, 33%);
+    --primary-color-green: hsl(144, 100%, 15%);
+    --primary-color-blue: rgb(28, 55, 189);
+    --primary-color-purple: hsl(301, 91%, 40%);
+}
+
+[data-theme*='dark'][data-color-theme*='green'] {
+    --primary-color-1: hsl(124, 95%, 38%);
+    --primary-color-2: hsl(124, 100%, 40%);
+    --primary-color-3: hsl(124, 95%, 32%);
+}
+
+[data-color-theme*='green'] {
+    --primary-color-1: hsl(144, 100%, 15%);
+    --primary-color-2: hsl(142, 68%, 29%);
+    --primary-color-3: hsl(124, 95%, 32%);
+}
+
+[data-color-theme*='purple'] {
+    --primary-color-1: hsl(301, 91%, 40%);
+    --primary-color-2: hsl(301, 77%, 46%);
+    --primary-color-3: hsl(298, 100%, 36%);
+}
+
+[data-theme*='dark'][data-color-theme*='purple'] {
+    --primary-color-1: hsl(301, 99%, 65%);
+    --primary-color-2: hsl(301 72% 61%);
+    --primary-color-3: hsl(298 100% 79%);
+}
+
+[data-color-theme*='blue'] {
+    --primary-color-1: hsl(230, 74%, 43%);
+    --primary-color-2: hsl(230, 66%, 48%);
+    --primary-color-3: hsl(223, 69%, 43%);
+}
+
+[data-theme*='dark'][data-color-theme*='blue'] {
+    --primary-color-1: hsl(213 100% 66%);
+    --primary-color-2: hsl(230 100% 67%);
+    --primary-color-3: hsl(223, 79%, 57%);
+}
+
+[data-color-theme*='orange'] {
+    --primary-color-1: hsl(30, 100%, 33%);
+    --primary-color-2: hsl(33, 89%, 40%);
+    --primary-color-3: hsl(17, 95%, 60%);
+}
+
+[data-theme*='dark'][data-color-theme*='orange'] {
+    --primary-color-1: hsl(30, 79%, 46%);
+    --primary-color-2: hsl(33, 67%, 50%);
+    --primary-color-3: hsl(17, 95%, 60%);
+}
+
+[data-color-theme*='red'] {
+    --primary-color-1: hsl(0, 72%, 48%);
+    --primary-color-2: hsl(0, 77%, 51%);
+    --primary-color-3: hsl(0, 65%, 24%);
+}
+
+[data-theme*='dark'][data-color-theme*='red'] {
+    --primary-color-1: hsl(0 100% 67%);
+    --primary-color-2: hsl(0, 64%, 55%);
+    --primary-color-3: hsl(0, 82%, 71%);
+}
+
+[data-width*='slim'] {
+    --width: min(60ch, 100vw - 2rem);
+}
+
+[data-width*='normal'] {
+    --width: min(80ch, 100vw - 2rem);
+}
+
+[data-width*='wide'] {
+    --width: min(160ch, 100vw - 2rem);
+}
+
+hr {
+    width: 250px;
+    margin: 40px auto;
+    border-bottom: 1px solid hsl(0, 0%, 87.1%);
+    background-color: transparent;
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 3.999rem;
+    color: var(--primary-color-1);
+    margin: 2rem 0;
+    padding: 0;
+}
+
+h2 {
+    font-weight: 400;
+    font-size: 2.999rem;
+    color: var(--primary-color-1);
+    margin: 0;
+    padding: 0;
+}
+
+h3 {
+    font-size: 2.333rem;
+    color: var(--primary-color-1);
+    font-weight: 500;
+    margin: 0;
+}
+
+h4 {
+    font-size: 2rem;
+    color: var(--primary-color-3);
+}
+
+h5 {
+    font-size: 1.666rem;
+}
+
+h6 {
+    font-size: 1.166rem;
+}
+
+h1 span,
+h2 span,
+h3 span {
+    white-space: nowrap;
+}
+
+h1.text,
+h2.text,
+h3.text {
+    color: var(--text);
+}
+
+p {
+    line-height: 1.8;
+    margin-bottom: 32px;
+}
+
+a,
+a:visited {
+    color: var(--primary-color-1);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: var(--primary-color-2);
+    text-decoration: underline;
+}
+
+a img {
+    border: none;
+}
