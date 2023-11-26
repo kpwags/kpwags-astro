@@ -1,0 +1,32 @@
+---
+import { getCurrentTheme } from '@lib/ConfigUtils';
+interface Props {
+    issueNumber: number;
+}
+
+const [theme] = getCurrentTheme();
+
+let commentsTheme = 'preferred-color-scheme';
+
+if (theme === 'light') {
+    commentsTheme = 'github-light';
+}
+
+if (theme === 'dark') {
+    commentsTheme = 'github-dark';
+}
+
+const { issueNumber } = Astro.props;
+---
+
+<div class="utterances-frame" id="comments"></div>
+
+<script
+    is:inline
+    src="https://utteranc.es/client.js"
+    crossorigin="anonymous"
+    async
+    repo="kpwags/kpwags.com-comments"
+    issue-number={issueNumber}
+    theme={commentsTheme}
+></script>

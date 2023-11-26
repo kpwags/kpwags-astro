@@ -1,0 +1,35 @@
+---
+interface Props {
+    content: string;
+    name: string;
+    username: string;
+    date: string;
+    link: string;
+    profileLink: string;
+}
+
+const { content, name, username, date, link, profileLink } = Astro.props;
+---
+
+<div class="embedded-post">
+    <blockquote class="post">
+        <p>{content}</p>
+         - {name} (<a href={profileLink} target="_blank">{username}</a>) <a href={link} target="_blank">{date}</a>
+    </blockquote>
+</div>
+
+<style>
+    .embedded-post {
+        margin: 32px 0;
+    }
+
+    blockquote.post {
+        border-left: 8px solid var(--primary-color-2);
+        padding-left: 32px;
+
+        p {
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+        }
+    }
+</style>

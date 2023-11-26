@@ -1,0 +1,98 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { calculateReadingTime, getPostExcerpt, removeAnchorLink, getPermalinkDate } from '@lib/PostUtils';
+import fs from 'fs';
+import path from 'path';
+import PostHeading from '@components/PostHeading.astro';
+import Tags from '@components/Tags.astro';
+import Comments from '@components/Comments.astro';
+import RelatedPosts from '@components/RelatedPosts.astro';
+import type { RelatedPost } from '@models/RelatedPost';
+
+interface Props {
+    title: string;
+    date: Date;
+    entry: any;
+    slug: string;
+    tags: string[];
+    commentIssueNumber: number;
+    body: string;
+    relatedPosts: RelatedPost[];
+}
+
+export async function getStaticPaths() {
+    const blogEntries = await getCollection('blog');
+
+    return blogEntries.map((entry) => {
+        const { year, day, month } = getPermalinkDate(entry.data.date);
+
+        return {
+            params: {
+                year,
+                month,
+                day,
+                slug: entry.data.urlSlug || entry.slug,
+            },
+            props: {
+                title: entry.data.title,
+                date: entry.data.date,
+                tags: entry.data.tags,
+                entry,
+                body: entry.body,
+                slug: entry.data.urlSlug || entry.slug,
+                commentIssueNumber: entry.data.commentIssueNumber || 0,
+                relatedPosts: entry.data.relatedPosts || [],
+            },
+        };
+    });
+}
+
+const { title, date, entry, tags, slug, body, commentIssueNumber, relatedPosts } = Astro.props;
+const readTime = calculateReadingTime(entry.body);
+const { Content } = await entry.render();
+
+const { year, day, month } = getPermalinkDate(date);
+
+const postImagesDirectory = path.join(process.cwd(), 'public', 'images', 'social-images', 'posts');
+const imageName = `${year}-${month}-${day}-${slug}.jpg`;
+
+let socialImage;
+
+if (fs.existsSync(path.join(postImagesDirectory, imageName))) {
+    socialImage = `/images/social-images/posts/${imageName}`;
+}
+
+const excerpt = removeAnchorLink(getPostExcerpt(body));
+---
+
+<Layout title={title} description={excerpt} image={socialImage}>
+    <main>
+        <article class="blog-post">
+            <PostHeading title={title} datePublished={date} readTime={readTime} />
+            <Content />
+
+            {
+                tags.length > 0 ? (
+                    <>
+                        <hr />
+                        <Tags tags={tags} />
+                    </>
+                ) : null
+            }
+
+            {
+                relatedPosts.length > 0 ? (
+                    <>
+                        <hr />
+                        <RelatedPosts posts={relatedPosts} />
+                    </>
+                ) : null
+            }
+
+            <hr />
+        </article>
+
+        {commentIssueNumber > 0 ? <Comments issueNumber={commentIssueNumber} /> : null}
+    </main>
+</Layout>

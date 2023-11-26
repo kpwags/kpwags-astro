@@ -1,0 +1,75 @@
+---
+import { formatDate } from '@lib/DateUtils';
+
+interface Props {
+    title: string;
+    link: string;
+    date: Date;
+    excerpt?: string;
+    readTime?: number;
+}
+
+const { title, link, date, excerpt, readTime } = Astro.props;
+---
+
+<article class="post">
+    <h2><a href={link}>{title}</a></h2>
+    <div class="metadata">
+        <div class="post-date">{formatDate(date)}</div>
+        {
+            readTime ? (
+                <>
+                    <div>&bull;</div>
+                    <div class="read-time">{readTime} min read</div>
+                </>
+            ) : null
+        }
+    </div>
+    {excerpt ? <div class="excerpt" set:html={excerpt} /> : null}
+</article>
+
+<style>
+    article.post {
+        margin: 32px 0 64px;
+        border: 1px solid var(--grey-1);
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+    article.post:hover {
+        border-color: var(--grey-2);
+        box-shadow: var(--box-shadow);
+    }
+
+    article.post .metadata {
+        display: flex;
+        justify-content: flex-start;
+        gap: 16px;
+        text-transform: uppercase;
+    }
+
+    article.post .metadata .post-date {
+        font-size: 1rem;
+        color: var(--grey-2);
+    }
+
+    article.post h2 {
+        font-size: 2rem;
+        line-height: 1.1;
+    }
+
+    article.post h2 a {
+        text-decoration: none;
+    }
+
+    div.excerpt {
+        margin: 16px 0 0;
+    }
+
+    @media (max-width: 414px) {
+        article.post h2 {
+            font-size: 2.25rem;
+            margin-bottom: 16px;
+        }
+    }
+</style>
