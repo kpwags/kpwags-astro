@@ -1,5 +1,6 @@
 :root {
     --background: hsl(0, 0%, 100%);
+    --shaded-background: hsl(0, 0%, 96%);
     --text: hsl(0, 0%, 15%);
     --white-1: hsl(0, 0%, 100%);
     --white-2: hsl(0, 0%, 90%);
@@ -28,6 +29,7 @@
 
 [data-theme*='dark'] {
     --background: hsl(0, 0%, 14%);
+    --shaded-background: hsl(0, 0%, 18%);
     --text: hsl(0, 0%, 94%);
     --primary-color-1: hsl(124, 95%, 38%);
     --primary-color-2: hsl(124, 100%, 40%);
@@ -47,6 +49,7 @@
 
 [data-theme*='light'] {
     --background: hsl(0, 0%, 100%);
+    --shaded-background: hsl(0, 0%, 96%);
     --text: hsl(0, 0%, 15%);
     --white-1: hsl(0, 0%, 100%);
     --white-2: hsl(0, 0%, 90%);
