@@ -39,14 +39,15 @@ export const getPostsPerYear = (posts: BlogPost[]): PostsPerYear[] => {
     for (let i = 0; i < years.length; i += 1) {
         postsPerYear.push({
             year: years[i],
-            count: posts.filter((p) => getPostYear(p.date.toString()) === years[i]).length,
+            count: posts.filter((p) => getPostYear(p.date.toString()) === years[i]).length,4
+        });
     }
 
     return postsPerYear;
 };
 ```
 
-The first thing I do is get a list of the years from all the posts. There will be a lot of duplicates here, so I use JavaScript’s `Set` object to create a unique list.
+The first thing I do is get a list of the years from all the posts. There will be a lot of duplicates here, so I use JavaScript's `Set` object to create a unique list.
 
 ### An Aside
 
@@ -85,7 +86,7 @@ I then can take that data and pass it into a component to create a nice graphic.
 
 ## Most Popular Tags
 
-While working on the years, I realized that when I converted my site to run on [Next.js], I added tags to all of my posts. While there are many tags I’ve used, I figured the ten most popular could be a good item to show.
+While working on the years, I realized that when I converted my site to run on [Next.js](https://nextjs.org), I added tags to all of my posts. While there are many tags I’ve used, I figured the ten most popular could be a good item to show.
 
 This one was going to prove to be a little more challenging. For reference, each blog post has an array of tags for it.
 
@@ -102,7 +103,7 @@ This one was going to prove to be a little more challenging. For reference, each
 ]
 ```
 
-This is an example from my [Reading Log - January 20 (#15)] post. Each tag has 2 properties. The display name, and the URL slug that corresponds to it. I’ve toyed with trying to auto-generate it, but this has worked for me thus far.
+This is an example from my [Reading Log - January 20 (#15)](https://kpwags.com/reading-log/15) post. Each tag has 2 properties. The display name, and the URL slug that corresponds to it. I’ve toyed with trying to auto-generate it, but this has worked for me thus far.
 
 To find the tags most commonly used, I wanted to create an array of tags with their associated post count.
 
@@ -299,13 +300,7 @@ Here I loop through the yearly data returned by the `calculateData()` function a
 
 The end result looks nice.
 
-<PostImage
-    src="/images/posts/2023-02-03-building-a-stats-page/posts-per-year.png"
-    alt="The end result of my posts per year chart showing horizontal bars representing the number of posts per year"
-    width={1008}
-    height={802}
-    centered
-/>
+![The end result of my posts per year chart showing horizontal bars representing the number of posts per year](../../assets/images/posts/2023-02-03-building-a-stats-page/posts-per-year.png)
 
 ### Most Popular Tags
 
@@ -390,13 +385,7 @@ return (
 
 The end result is very similar.
 
-<PostImage
-    src="/images/posts/2023-02-03-building-a-stats-page/most-popular-tags.png"
-    alt="The end result of my most popular tags chart displaying horizontal bars representing posts per tag"
-    width={1046}
-    height={754}
-    centered
-/>
+![The end result of my most popular tags chart displaying horizontal bars representing posts per tag](../../assets/images/posts/2023-02-03-building-a-stats-page/most-popular-tags.png)
 
 It was a fun little project. You can view the full page [here](https://kpwags.com/stats).
 

@@ -9,14 +9,7 @@ For a while now I've been adding an image for when my posts get shared on Twitte
 
 The first thing I had to do was build the template. I used Photoshop to build it, but you can use whatever graphics tool you would like such as [Gimp](https://www.gimp.org) or [Paint.net](https://www.getpaint.net).
 
-<PostImage
-    src="/images/posts/2022-11-03-building-a-social-image-generator-console-application/template.jpg"
-    alt="the template I'm using for my social image"
-    width={1200}
-    height={675}
-    centered
-    shadowed={false}
-/>
+![the template I'm using for my social image](../../assets/images/posts/2022-11-03-building-a-social-image-generator-console-application/template.jpg)
 
 The console application is reliant upon the [SixLabors Image and Font Libraries](https://sixlabors.com/) as I wanted this to work on both Windows & MacOS. Unforunately Microsoft's `System.Drawing.Common` library is dependent upon Windows libraries so MacOS would be a no-go.
 

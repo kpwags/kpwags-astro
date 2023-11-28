@@ -1,0 +1,14 @@
+article.blog-post p:has(img):has(+ div.image-credit) {
+    margin-bottom: 0;
+}
+
+article.blog-post img {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-credit {
+    font-style: italic;
+    text-align: center;
+}

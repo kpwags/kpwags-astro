@@ -10,14 +10,7 @@ My wife and I, more often than I would care to admit, fail to come to a consensu
 
 Thinking about it a little more, I decided that I'd try my hand at something a little more universal that other people can use. A JSON file is all nice for what Lauren and I need, but the list of restaurants probably isn't all that useful for someone living in New York or California. In the end, I decided to use Google's Places API to randomly choose a restaurant for anyone.
 
-<PostImage
-    src="/images/posts/2016-02-19-i-made-a-thing/where-do-you-want-to-eat.jpg"
-    alt="Where Do You Want To Eat"
-    width={1600}
-    height={1000}
-    centered
-    shadowed
-/>
+![Where Do You Want To Eat](../../assets/images/posts/2016-02-19-i-made-a-thing/where-do-you-want-to-eat.jpg)
 
 All the person would need to do would be to enter their zip code and boom, a restaurant would be chosen. It worked out pretty well. But then I realized that it didn't really give much flexibility to the result. I then decided to give the user the option to enter in a custom query to randomly choose from. In the first version of it, I defaulted the query to "restaurant" which works well enough, but it's not the most specific. So I added a new textbox for users to enter their custom query to replace the default. So now, it's even possible for users to randomly decide which shoe store to go to. Not quite the intention of the tool, but hey, it still works.
 

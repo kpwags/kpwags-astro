@@ -1,0 +1,29 @@
+---
+interface Props {
+    source: string;
+    url: string;
+    title: string;
+}
+
+const { source, url, title } = Astro.props;
+---
+
+<div class="in-depth-notes">
+    <h3><span class="source">{source}:</span> <a href={url}>{title}</a></h3>
+    <slot />
+    <hr />
+</div>
+
+<style>
+    .in-depth-notes {
+        margin-bottom: 2rem;
+    }
+
+    .in-depth-notes h3 {
+        font-size: 1.85rem;
+    }
+
+    .source {
+        color: var(--text);
+    }
+</style>
