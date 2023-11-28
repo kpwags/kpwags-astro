@@ -8,6 +8,52 @@ article.blog-post img {
     margin-right: auto;
 }
 
+article blockquote {
+    margin: 0;
+    border-left: 5px solid var(--primary-color-1);
+}
+
+article blockquote p {
+    padding: 0 0 0 24px;
+    font-style: italic;
+}
+
+article ul {
+    margin: 0 0 32px 0;
+}
+
+article ul li {
+    margin: 12px 0;
+}
+
+article div.code-block-filename {
+    font-weight: 500;
+    padding-left: 12px;
+    background-color: var(--shaded-background);;
+    border: 1px solid #24292e;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+article div.code-block-filename + pre {
+    margin-top: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+article pre {
+    padding: 16px;
+    border-radius: 6px;
+}
+
+article pre code {
+    font-size: 1rem;
+}
+
+article p code {
+    /* font-size: clamp(1rem, 0.96rem + 0.22vw, 1.125rem); */
+}
+
 .image-credit {
     font-style: italic;
     text-align: center;

@@ -40,6 +40,7 @@ Like many of my projects, I use Microsoft’s Identity libraries to handle users
 
 To set this up, I need to add Microsoft Identity. This is how it’s done in other apps as well. In `Program.cs` file, (or `Startup.cs` in older project templates).
 
+<div class="code-block-filename">Program.cs</div>
 ```csharp Program.cs
 builder.Services.AddIdentity<UserAccountDto, IdentityRole<int>>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -50,6 +51,7 @@ By declaring `IdentityRole` with `<int>`, I’m telling EntityFramework (EF) to 
 
 The UserAccount table is much the same, but since I need to add values to it, I have it defined in its own class. Again, having it inherit the `IdentityUser` type with `<int>` will have EF use an integer for the ID column type.
 
+<div class="code-block-filename">UserAccountDto.cs</div>
 ```csharp UserAccountDto.cs
 using Microsoft.AspNetCore.Identity;
 
@@ -65,6 +67,7 @@ This in itself doesn’t vary much from other project types so the familiarity h
 
 The next thing I needed to do was add the Blazored SessionStorage library. It’s able to be done by adding it to the `Program.cs` file.
 
+<div class="code-block-filename">Program.cs</div>
 ```csharp Program.cs
 builder.Services.AddBlazoredSessionStorage();
 ```
@@ -75,6 +78,7 @@ The next step was to build a custom authentication provider. Let’s call it `Cu
 
 It will need to implement the abstract class `AuthenticationStateProvider`.
 
+<div class="code-block-filename">CustomAuthenticationStateProvider.cs</div>
 ```csharp CustomAuthenticationStateProvider.cs
 public class CustomAuthenticationStateProvider : AuthenticationStateProvider
 {
@@ -84,6 +88,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
 
 I’m going to need access to both Blazor’s session storage and our `UserManager`, so I’ll add them through dependency injection.
 
+<div class="code-block-filename">CustomAuthenticationStateProvider.cs</div>
 ```csharp CustomAuthenticationStateProvider.cs
 public class CustomAuthenticationStateProvider : AuthenticationStateProvider
 {
@@ -103,6 +108,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
 
 The first thing I needed to do was to override the `GetAuthenticationStateAync` method. This is the key method needed for method returns the current authentication state. This method is responsible for returning the authentication state to whatever is asking for it.
 
+<div class="code-block-filename">CustomAuthenticationStateProvider.cs</div>
 ```csharp CustomAuthenticationStateProvider.cs
 public override async Task<AuthenticationState> GetAuthenticationStateAsync()
 {
@@ -146,6 +152,7 @@ Now that that’s been implemented, we can use the `<AuthorizeView>` elements in
 
 To start, I needed to modify my `App.razor` file to allow for handling the authentication state.
 
+<div class="code-block-filename">App.razor</div>
 ```razor App.razor
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
@@ -156,13 +163,13 @@ To start, I needed to modify my `App.razor` file to allow for handling the authe
         <NotFound>...</NotFound>
     </Router>
 </CascadingAuthenticationState>
-
 ```
 
 I had to encompass the entire page with the `<CascadingAuthenticationState>` tag and I had to change the `<RouteView>` tag in with the `<AuthorizeRouteView>` tag. This will allow for the AuthenticationState to cascade down into my components.
 
 Here’s a good example of it in use in an actual component. In the site’s nav bar, I have links to login and to register when there is no user logged in, and the user’s name and a logout button when there is an active session.
 
+<div class="code-block-filename">NavBar.razor</div>
 ```razor NavBar.razor
 @inject AuthenticationStateProvider AuthStateProvider
 @inject NavigationManager NavigationManager
@@ -214,6 +221,7 @@ The Custom Authentication State Provider I built above doesn’t actually verify
 
 I created a service to handle this.
 
+<div class="code-block-filename">AccountService.cs</div>
 ```csharp AccountService.cs
 public async Task<UserAccount> LoginUser(string email, string password)
 {
@@ -239,6 +247,7 @@ This function takes an email and a password and uses the `UserManager` and `Sign
 
 Let’s take a look at my login page.
 
+<div class="code-block-filename">Login.razor</div>
 ```csharp Login.razor
 @code {
 	...
@@ -269,6 +278,7 @@ The first thing I do is pass the email and password to the `LoginUser` function.
 
 You might have noticed the `EndUserSession()` function call in the nav bar, and the `StartUserSession` call in the code above. These are the last two pieces in the `CustomAuthenticationStateProvider` class.
 
+<div class="code-block-filename">CustomAuthenticationStateProvider.cs</div>
 ```csharp CustomAuthenticationStateProvider.cs
 public async Task StartUserSession(UserAccount user)
 {

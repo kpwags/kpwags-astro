@@ -30,6 +30,7 @@ Let's dig in.
 
 The first thing I wanted to do was build the model.
 
+<div class="code-block-filename">AddBrandViewModel.cs</div>
 ```csharp AddBrandViewModel.cs
 using System.ComponentModel.DataAnnotations;
 
@@ -63,7 +64,8 @@ For the card type, there are only two options, "Baseball" and "Football". For th
 
 Now for the fun part! Building the actual form on the page. Let's just quickly set up the frame for the page.
 
-```razor Add.razor
+<div class="code-block-filename">Add.razor</div>
+```razor
 @page "/brands/add"
 
 @using CardOrganizer.ViewModels
@@ -90,6 +92,7 @@ This is the basic structure of the page. I specify that the page will be located
 
 Let's start to add in the inner workings. Let's start by adding in the `AddBrandViewModel` and some of the other helper variables I'll be using on the page.
 
+<div class="code-block-filename">Add.razor</div>
 ```razor Add.razor
 @code {
     private readonly AddBrandViewModel _model = new();
@@ -102,6 +105,7 @@ The `AddBrandViewModel` is the model we will be using to create the brand and bi
 
 The next thing we want to do is to start adding the form into the HTML.
 
+<div class="code-block-filename">Add.razor</div>
 ```razor Add.razor
 <EditForm Model="@_model" OnSubmit="@AddBrand">
     <DataAnnotationsValidator/>
@@ -142,6 +146,7 @@ In the code section, I also added an empty function, `AddBrand(EditContext editC
 
 Next, let's add the form controls.
 
+<div class="code-block-filename">Add.razor</div>
 ```razor Add.razor
 <fieldset disabled="@_isProcessing" aria-busy="@_isProcessing">
     <div class="my-8">
@@ -182,6 +187,7 @@ The final piece is the submit button that will call the `AddBrand` function that
 
 Finally, let's add the form processing to actually save the form contents to the database.
 
+<div class="code-block-filename">Add.razor</div>
 ```razor Add.razor
 @code {
     ...
@@ -227,6 +233,7 @@ If the form is valid, the code will go about using the BrandRepository to add th
 
 ## Final Result
 
+<div class="code-block-filename">Add.razor</div>
 ```razor Add.razor
 @page "/brands/add"
 

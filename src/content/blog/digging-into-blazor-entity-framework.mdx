@@ -43,6 +43,7 @@ Setting up my models worked the same way as [Digital Family Cookbook](https://gi
 
 Let's create my first database table and model. Each of my baseball cards are going to need a brand (think Topps, Donruss, or Upper Deck).
 
+<div class="code-block-filename">BrandDto.cs</div>
 ```csharp
 // BrandDto.cs
 
@@ -64,6 +65,7 @@ public class BrandDto
 
 Now let's actually create the app's database context.
 
+<div class="code-block-filename">ApplicationDbContext.cs</div>
 ```csharp
 // ApplicationDbContext.cs
 
@@ -125,6 +127,7 @@ $ dotnet ef database update
 
 Now that the database was built, I can interact with the database using the `IDbContextFactory` I added to my `Program.cs` file above.
 
+<div class="code-block-filename">BrandRepository.cs</div>
 ```csharp
 // BrandRepository.cs
 

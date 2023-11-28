@@ -35,6 +35,7 @@ This provides a nice library to make the calls easy. The issue I did find though
 
 To make my job a little easier, I got some calls working and looked at the JSON returned from Notion's API and built some types. Now these types are not complete. They do have more properties attached to them. I just defined the minimum I needed for my purpose. If and when you make your calls, it would be useful to add the additional properties as you see fit.
 
+<div class="code-block-filename">NotionShared.ts</div>
 ```typescript NotionShared.ts
 export interface NotionTitle {
 	id: string;
@@ -64,6 +65,7 @@ export interface NotionPlainText {
 
 These types are used for me defining the response that I expect back from Notion.
 
+<div class="code-block-filename">NotionMovie.ts</div>
 ```typescript NotionMovie.ts
 import {
     NotionLink,
@@ -105,6 +107,7 @@ I created a function called `fetchMoviesFromNotion` that takes the cursor as an 
 
 The return for this function is a `NotionMovieApiResponse` object.
 
+<div class="code-block-filename">Notion.ts</div>
 ```typescript notion.ts
 import { Client } from '@notionhq/client';
 
@@ -166,6 +169,7 @@ The final argument is `sorts`. Rather than sorting manually after bringing every
 
 The results from Notion's call are then assigned to the `response` variable. For me to handle the function's return.
 
+<div class="code-block-filename">Notion.ts</div>
 ```typescript Notion.ts
 let nextCursor: string | null = null;
 
@@ -191,6 +195,7 @@ I then send the data back for processing.
 
 The main function that handles bringing back the movies is called `getMovies()`. It returns a list of movies defined as:
 
+<div class="code-block-filename">Movie.ts</div>
 ```typescript Movie.ts
 interface Movie {
     id: string;
@@ -204,6 +209,7 @@ interface Movie {
 }
 ```
 
+<div class="code-block-filename">Notion.ts</div>
 ```typescript Notion.ts
 export const getMovies = async (): Promise<Movie[]> => {
     const movies: Movie[] = [];
@@ -232,6 +238,7 @@ I have every call to Notion's API re-assign the cursor returned from Notion assi
 
 This is the `mapResultToMovie()` function to help keep the `getMovies()` code a little cleaner:
 
+<div class="code-block-filename">Notion.ts</div>
 ```typescript Notion.ts
 const mapResultToMovie = (result: NotionMovie): Movie => ({
     id: result.id,
