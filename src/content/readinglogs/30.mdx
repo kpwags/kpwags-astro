@@ -1,0 +1,142 @@
+---
+id: 30
+title: 'Reading Log - May 26, 2023 (#30)'
+date: '2023-05-26'
+tags: ['Reading Log', 'Instagram', 'Google', 'TypeScript', 'C#', '.NET', 'Microsoft', 'Titanic']
+commentIssueNumber: 111
+---
+import YouTubeEmbed from '@components/YouTubeEmbed.astro'
+import InDepthNotes from '@components/InDepthNotes.astro'
+
+Wow, 30 issues now of my reading log in its current format! This week I read about Instagram joining the fediverse, Google’s AMP disaster, the importance of core functionality working without JavaScript, and more.
+
+## In Depth
+
+<InDepthNotes
+    source="Jay Peters"
+    title="This is Instagram’s new Twitter competitor"
+    url="https://www.theverge.com/2023/5/19/23730070/instagram-twitter-app-competitor-leak"
+>
+    I deleted my Facebook & Instagram accounts years ago and have never looked back. I’ve also promised to never create an account on a platform Facebook, now Meta owns. I don’t intend to change that. With that said, I like that they seem to be planning on some form of decentralization and tying it into Mastodon/ActivityPub.
+</InDepthNotes>
+
+<InDepthNotes
+    source="Gergely Orosz"
+    title="Is Critical Thinking the Most Important Skill for Software Engineers?"
+    url="https://blog.pragmaticengineer.com/critical-thinking/"
+>
+    This struck home for me.
+
+    > I can answer why I felt uneasy about asking what a term like idempotency means: it's because I was admitting that I don't understand a part of tech jargon. And, to be fair, such admission implies that my professional experience or skills are below the person who knows what this jargon means, and knows how to use it.
+
+    In work, it can be hard to admit you don’t know certain terminology, but good teams will not look down on people for asking for clarifications and foster an open environment for everyone to feel comfortable asking questions.
+
+    Gergely also had a good point about the thought leaders that have popped up in the industry.
+
+    > These people - like myself - share opinions, observations, and views. Many less experienced engineers take these views at face value, assuming as many other people are paying attention to this person, this "famous" person must be right.
+
+    It reminds me a lot of the trope “I read it on the internet, so it must be true!”. Some thought leaders are where they’re at because they have studied and used their language and tooling for a long time and know their stuff. Others might not be as experienced. But there’s always a lot of nuance with what they might be pushing. Is it right for you? Despite popular opinion, the true response often comes down to two simple words: “It depends”.
+
+    The best advice really comes down to digging in and asking questions about why people are recommending what they’re recommending.
+</InDepthNotes>
+
+<InDepthNotes
+    source="Jeremy Keith"
+    title="Read-only web apps"
+    url="https://adactio.com/journal/20113"
+>
+    I completely agree with Jeremy here.
+
+    > The most cartoonish misrepresentation of progressive enhancement is that it means making everything work without JavaScript.
+    > No. Progressive enhancement means making sure your core functionality works without JavaScript.
+
+    My old site on Jekyll worked well with Javascript disabled. There wasn’t much that JS was needed for and most of it was “niceties” rather than key functionality. You could still read all my blog posts and navigate around. I feel like that’s important. I’ve tried to do the same thing on my current blog with Next.js.
+
+    I’ve gone back and forth between having JavaScript disabled and not disabled in the browser and while I certainly wouldn’t expect fancier web apps to work without JavaScript, I SHOULD expect that I should be able to read blog posts on a blog.
+</InDepthNotes>
+
+<InDepthNotes
+    source="David Pierce"
+    title="Speed Trap"
+    url="https://www.theverge.com/23711172/google-amp-accelerated-mobile-pages-search-publishers-lawsuit"
+>
+    I’ll be completely honest and admit that I didn’t know all that much background on the history of AMP and why it was bad as it was. Reading this was enlightening and there were some quotes that stuck out to me.
+
+    > “If Google said, ‘you must have your homepage colored bright pink on Tuesdays to be the result in Google,’ everybody would do it, because that’s what they need to do to survive,” says Terence Eden, a web standards expert and a former member of the Google AMP Advisory Committee.
+
+    This only highlights the power Google has. Media outlets are so dependent on Google that whether they like it or not, they have to play by Google’s rules, no matter how crazy they are, or how often they change them.
+
+    > As long as anyone played the game, everybody had to. “Google’s strategy is always to create prisoner’s dilemmas that it controls — to create a system such that if only one person defects, then they win,” a former media executive says. As long as anyone was willing to use AMP and get into that carousel, everyone else had to do the same or risk being left out.
+
+    This goes back to [Chokepoint Capitalism](https://kpwags.com/posts/2022/12/07/chokepoint-capitalism-a-review), they have them wrapped up so tightly that they’re stuck.
+
+    > “You meet with a Facebook person and you see in their eyes they’re psychotic,” says one media executive who’s dealt with all the major platforms. “The Apple person kind of listens but then does what it wants to do. The Google person honestly thinks what they’re doing is the best thing.”
+
+    I laughed out loud a little bit there.
+
+    The one thing I do remember is Google touting AMP for is for speed. And given how bad the mobile experience on sites can be, I can’t say I don’t understand. I still hold that a well designed site can run beautifully and smoothly on mobile, you just need to design and build it the right way which might not be quite as “profitable”. It seems I’m not the only one with that thought.
+
+    > AMP, it turned out, wasn’t even that fast. Multiple publishers ran internal tests and found they were able to make pages that loaded more quickly than AMP pages, so long as they were able to rein in the ad load and extra trackers.
+
+    At the end of the day, it’s a good thing that we seem to be moving away from AMP.
+</InDepthNotes>
+
+## Link Blast
+
+### 👨🏼‍💻 Software Development & Design
+
+[Announcing TypeScript 5.1 RC](https://devblogs.microsoft.com/typescript/announcing-typescript-5-1-rc/) - _Daniel Rosenwasser_
+
+[WebKit Features in Safari 16.5](https://webkit.org/blog/14154/webkit-features-in-safari-16-5/) - _Jen Simmons_
+
+[JavaScript Array Group](https://davidwalsh.name/array-group) - _David Walsh_
+
+[My 2023 C# Software Developer Tool List](https://michaelscodingspot.com/developer-tools/) - _Michael Shplit_
+
+[The Future of ASP.NET Core: .NET 8 Feature Preview](https://www.claudiobernasconi.ch/2023/05/20/asp-net-core-dotnet-8-preview/) - _Claudio Bernasconi_
+
+[C# logging: Best practices in 2023 with examples and tools](https://raygun.com/blog/c-sharp-logging-best-practices/) - _Shane Duggan_
+
+[Good (Blazor) Components are... ?](https://jonhilton.net/good-blazor-components/) - _Jon Hilton_
+
+[Podman Desktop 1.0 Released As An Alternative To Docker Desktop](https://www.phoronix.com/news/Podman-Desktop-1.0) - _Michael Larabel_
+
+[There's still no silver bullet](https://changelog.com/posts/still-no-silver-bullet) - _Jerod Santo_
+
+[Markdown images are an anti-pattern](https://daverupert.com/2023/05/markdown-images-anti-pattern/) - _Dave Rupert_
+
+[Refactor your .NET HTTP Clients to Typed HTTP Clients](https://timdeschryver.dev/blog/refactor-your-net-http-clients-to-typed-http-clients) - _Tim Deschryver_
+
+[6 CSS snippets every front-end developer should know in 2023](https://web.dev/6-css-snippets-every-front-end-developer-should-know-in-2023/) - _Adam Argyle_
+
+### 🖥 Technology & the Internet
+
+[Following UK antitrust order, Meta sells Giphy to Shutterstock for $53M after buying it for $400M](https://techcrunch.com/2023/05/23/meta-sells-giphy-to-shutterstock-for-53m-after-uk-divestment-order/) - _Paul Sawers_
+
+[“The Secret List of Websites”](https://chriscoyier.net/2023/04/21/the-secret-list-of-websites/) - _Chris Coyier_
+
+### 📈 Business & Finance
+
+[Microsoft exec tells employees to improve its stock performance in lieu of raises](https://www.theverge.com/2023/5/19/23729711/microsoft-cmo-staff-stock-price-pay) - _Emma Roth_
+
+### 🔬 Science
+
+[A remarkable new view of the Titanic shipwreck is here, thanks to deep-sea mappers](https://www.npr.org/2023/05/20/1177056829/titanic-scan) - _Rachel Treisman_
+
+### 🎧 Podcasts
+
+[WorkLife with Adam Grant: Knowing When to Quit with World Poker Champion Annie Duke](https://podcasts.apple.com/us/podcast/knowing-when-to-quit-with-world-poker-champion-annie-duke/id1346314086?i=1000591027157)
+
+[The Indicator: Is AI a job-killer or an up-skiller?](https://www.npr.org/2023/05/23/1177772441/is-ai-a-job-killer-or-an-up-skiller)
+
+[Make Me Smart #930: The pandemic’s panic-neglect cycle isn’t over](https://www.marketplace.org/shows/make-me-smart/the-pandemics-panic-neglect-cycle-isnt-over/)
+
+[The Unhandled Exception #48: Coffee and Code - with Isaac Levin](https://unhandledexceptionpodcast.com/posts/0048-isaaclevin/)
+
+[Marketplace: What’s really at the heart of the debt limit debate?](https://www.marketplace.org/shows/marketplace/whats-really-at-the-heart-of-the-debt-limit-debate/)
+
+### 🎵 A Song to Leave You With
+
+#### Dave Hause - Pedal Down
+
+<YouTubeEmbed id="bH5-6dQcgmM" title="Dave Hause - Pedal Down" />
