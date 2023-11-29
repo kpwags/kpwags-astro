@@ -1,0 +1,71 @@
+---
+interface Props {
+    src: string;
+    title: string;
+    author: string;
+    width?: number;
+    height?: number;
+    link?: string;
+}
+
+const { src, title, author, width, height, link } = Astro.props;
+---
+
+<div class="book">
+    <div class="book-image">
+        <img src={src} alt={`${title} by ${author}`} width={width} height={height} />
+    </div>
+    <div class="description">
+        <h2>
+            {
+                link ? (
+                    <a href={link} target="_blank" rel="noreferrer" title="Buy on bookshop.org">
+                        {title}
+                    </a>
+                ) : (
+                    <>{title}</>
+                )
+            }
+        </h2>
+        <p class="meta">by {author}</p>
+        <p class="thoughts"><slot /></p>
+    </div>
+</div>
+
+<style>
+    .book {
+        display: grid;
+        margin: 25px 0;
+        grid-template-columns: 1fr 3fr;
+        grid-column-gap: 25px;
+    }
+
+    .description h2 {
+        font-size: 2rem;
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .description h2 a {
+        color: var(--primary-color-2);
+    }
+
+    .description h2 a:hover {
+        color: var(--primary-color-1);
+    }
+
+    .description p.meta {
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    @media all and (max-width: 767px) {
+        .book {
+            display: block;
+        }
+
+        .book-image {
+            display: none;
+        }
+    }
+</style>

@@ -1,0 +1,29 @@
+---
+interface Props {
+    previousLink?: string;
+    previousLinkText?: string;
+    nextLink?: string;
+    nextLinkText?: string;
+}
+
+const { previousLink, previousLinkText, nextLink, nextLinkText } = Astro.props;
+---
+
+<section class="pagination">
+    {previousLink && previousLinkText ? <a href={previousLink}>&leftarrow; {previousLinkText}</a> : null}
+    {nextLink && nextLinkText ? <a href={nextLink}>{nextLinkText} &rightarrow;</a> : null}
+</section>
+
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        font-size: 1.25rem;
+        margin: 32px 0;
+    }
+
+    .pagination a {
+        text-decoration: none;
+    }
+</style>

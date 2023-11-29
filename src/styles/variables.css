@@ -1,5 +1,6 @@
 :root {
     --background: hsl(0, 0%, 100%);
+    --shaded-background: hsl(0, 0%, 96%);
     --text: hsl(0, 0%, 15%);
     --white-1: hsl(0, 0%, 100%);
     --white-2: hsl(0, 0%, 90%);
@@ -28,6 +29,7 @@
 
 [data-theme*='dark'] {
     --background: hsl(0, 0%, 14%);
+    --shaded-background: hsl(0, 0%, 18%);
     --text: hsl(0, 0%, 94%);
     --primary-color-1: hsl(124, 95%, 38%);
     --primary-color-2: hsl(124, 100%, 40%);
@@ -47,6 +49,7 @@
 
 [data-theme*='light'] {
     --background: hsl(0, 0%, 100%);
+    --shaded-background: hsl(0, 0%, 96%);
     --text: hsl(0, 0%, 15%);
     --white-1: hsl(0, 0%, 100%);
     --white-2: hsl(0, 0%, 90%);
@@ -141,80 +144,4 @@
 
 [data-width*='wide'] {
     --width: min(160ch, 100vw - 2rem);
-}
-
-hr {
-    width: 250px;
-    margin: 40px auto;
-    border-bottom: 1px solid hsl(0, 0%, 87.1%);
-    background-color: transparent;
-}
-
-h1 {
-    font-weight: 500;
-    font-size: 3.999rem;
-    color: var(--primary-color-1);
-    margin: 2rem 0;
-    padding: 0;
-}
-
-h2 {
-    font-weight: 400;
-    font-size: 2.999rem;
-    color: var(--primary-color-1);
-    margin: 0;
-    padding: 0;
-}
-
-h3 {
-    font-size: 2.333rem;
-    color: var(--primary-color-1);
-    font-weight: 500;
-    margin: 0;
-}
-
-h4 {
-    font-size: 2rem;
-    color: var(--primary-color-3);
-}
-
-h5 {
-    font-size: 1.666rem;
-}
-
-h6 {
-    font-size: 1.166rem;
-}
-
-h1 span,
-h2 span,
-h3 span {
-    white-space: nowrap;
-}
-
-h1.text,
-h2.text,
-h3.text {
-    color: var(--text);
-}
-
-p {
-    line-height: 1.8;
-    margin-bottom: 32px;
-}
-
-a,
-a:visited {
-    color: var(--primary-color-1);
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-a:hover {
-    color: var(--primary-color-2);
-    text-decoration: underline;
-}
-
-a img {
-    border: none;
 }
