@@ -1,0 +1,26 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import PostLink from '@components/PostLink.astro';
+import { getPostExcerpt, getPermalink, sortReadingLogs } from '@lib/PostUtils';
+import { POSTS_PER_PAGE } from '../../lib/constants';
+import Pagination from '@components/Pagination.astro';
+
+const logs = await getCollection('readinglogs');
+
+const readingLogs = sortReadingLogs(logs).slice(0, POSTS_PER_PAGE);
+---
+
+<Layout title="Reading Logs">
+    <main>
+        <h1>Reading Log</h1>
+
+        {
+            readingLogs.map((rl) => (
+                <PostLink title={rl.data.title} link={`/reading-log/${rl.data.id}`} date={rl.data.date} excerpt={getPostExcerpt(rl.body)} />
+            ))
+        }
+
+        <Pagination nextLink="/reading-logs/2" nextLinkText="Older" />
+    </main>
+</Layout>

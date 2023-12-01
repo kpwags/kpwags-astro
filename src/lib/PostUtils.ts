@@ -46,6 +46,13 @@ export const sortPosts = (posts: CollectionEntry<'blog'>[]): CollectionEntry<'bl
     return -1;
 });
 
+export const sortReadingLogs = (posts: CollectionEntry<'readinglogs'>[]): CollectionEntry<'readinglogs'>[] => posts.sort((a: CollectionEntry<'readinglogs'>, b: CollectionEntry<'readinglogs'>) => {
+    if (a.data.date < b.data.date) {
+        return 1;
+    }
+    return -1;
+});
+
 export const sortAllPosts = (posts: CombinedPost[]): CombinedPost[] => posts.sort((a: CombinedPost, b: CombinedPost) => {
     if (a.date < b.date) {
         return 1;
@@ -81,3 +88,24 @@ export const getPermalinkDate = (date: Date): { year: string, month: string, day
     month: String(date.getMonth() + 1).padStart(2, '0'),
     day: String(date.getDate() + 1).padStart(2, '0'),
 });
+
+export const combineBlogAndReadingLog = (blogEntries: CollectionEntry<'blog'>[], readingLogs: CollectionEntry<'readinglogs'>[]): CombinedPost[] => {
+    return sortAllPosts([
+        ...blogEntries.map((post) => ({
+            title: post.data.title,
+            link: getPermalink(post),
+            date: post.data.date,
+            tags: post.data.tags,
+            excerpt: getPostExcerpt(post.body),
+            content: post.body,
+        })),
+        ...readingLogs.map((log) => ({
+            title: log.data.title,
+            link: `/reading-log/${log.data.id}`,
+            date: log.data.date,
+            tags: log.data.tags,
+            excerpt: getPostExcerpt(log.body),
+            content: log.body,
+        })),
+    ]);
+};

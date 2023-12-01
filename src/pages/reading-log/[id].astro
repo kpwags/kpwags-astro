@@ -1,0 +1,69 @@
+---
+import '@styles/reading-logs.css';
+
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { getPostExcerpt, removeAnchorLink } from '@lib/PostUtils';
+import PostHeading from '@components/PostHeading.astro';
+import Tags from '@components/Tags.astro';
+import Comments from '@components/Comments.astro';
+
+interface Props {
+    id: number;
+    title: string;
+    date: Date;
+    readingLog: any;
+    tags: string[];
+    commentIssueNumber: number;
+    body: string;
+}
+
+export async function getStaticPaths() {
+    const readingLogs = await getCollection('readinglogs');
+
+    return readingLogs.map((readingLog) => {
+        return {
+            params: {
+                id: readingLog.data.id,
+            },
+            props: {
+                id: readingLog.data.id,
+                title: readingLog.data.title,
+                date: readingLog.data.date,
+                tags: readingLog.data.tags,
+                readingLog,
+                body: readingLog.body,
+                commentIssueNumber: readingLog.data.commentIssueNumber || 0,
+            },
+        };
+    });
+}
+
+const { id, title, date, readingLog, tags, body, commentIssueNumber } = Astro.props;
+
+const { Content } = await readingLog.render();
+
+const socialImage = `/images/social-images/reading-logs/${id}.jpg`;
+
+const excerpt = removeAnchorLink(getPostExcerpt(body));
+---
+
+<Layout title={title} description={excerpt} image={socialImage}>
+    <article class="reading-log">
+        <PostHeading title={title} datePublished={date} />
+        <Content />
+
+        {
+            tags.length > 0 ? (
+                <>
+                    <hr />
+                    <Tags tags={tags} />
+                </>
+            ) : null
+        }
+
+        <hr />
+    </article>
+
+    {commentIssueNumber > 0 ? <Comments issueNumber={commentIssueNumber} /> : null}
+</Layout>

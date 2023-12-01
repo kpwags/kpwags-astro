@@ -69,32 +69,30 @@ const excerpt = removeAnchorLink(getPostExcerpt(body));
 ---
 
 <Layout title={title} description={excerpt} image={socialImage}>
-    <main>
-        <article class="blog-post">
-            <PostHeading title={title} datePublished={date} readTime={readTime} />
-            <Content />
+    <article class="blog-post">
+        <PostHeading title={title} datePublished={date} readTime={readTime} />
+        <Content />
 
-            {
-                tags.length > 0 ? (
-                    <>
-                        <hr />
-                        <Tags tags={tags} />
-                    </>
-                ) : null
-            }
+        {
+            tags.length > 0 ? (
+                <>
+                    <hr />
+                    <Tags tags={tags} />
+                </>
+            ) : null
+        }
 
-            {
-                relatedPosts.length > 0 ? (
-                    <>
-                        <hr />
-                        <RelatedPosts posts={relatedPosts} />
-                    </>
-                ) : null
-            }
+        {
+            relatedPosts.length > 0 ? (
+                <>
+                    <hr />
+                    <RelatedPosts posts={relatedPosts} />
+                </>
+            ) : null
+        }
 
-            <hr />
-        </article>
+        <hr />
+    </article>
 
-        {commentIssueNumber > 0 ? <Comments issueNumber={commentIssueNumber} /> : null}
-    </main>
+    {commentIssueNumber > 0 ? <Comments issueNumber={commentIssueNumber} /> : null}
 </Layout>

@@ -29,7 +29,7 @@ article ul li {
 article div.code-block-filename {
     font-weight: 500;
     padding-left: 12px;
-    background-color: var(--shaded-background);;
+    background-color: var(--shaded-background);
     border: 1px solid #24292e;
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
@@ -48,10 +48,6 @@ article pre {
 
 article pre code {
     font-size: 1rem;
-}
-
-article p code {
-    /* font-size: clamp(1rem, 0.96rem + 0.22vw, 1.125rem); */
 }
 
 .image-credit {
