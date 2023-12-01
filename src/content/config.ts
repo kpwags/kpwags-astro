@@ -14,6 +14,19 @@ const BlogPostCollection = defineCollection({
     }),
 });
 
+const ReadingLogCollection = defineCollection({
+    schema: z.object({
+        title: z.string(),
+        date: z.string().transform(str => new Date(str)),
+        tags: z.array(z.string()),
+        commentIssueNumber: z.number().optional(),
+        excerpt: z.string().optional(),
+        description: z.string().optional(),
+        id: z.number(),
+    }),
+});
+
 export const collections = {
     'blog': BlogPostCollection,
+    'readinglogs': ReadingLogCollection,
 };

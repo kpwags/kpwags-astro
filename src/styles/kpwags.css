@@ -96,6 +96,15 @@ a img {
     border: none;
 }
 
+.utterances-frame {
+    margin-top: 2rem;
+    position: relative;
+}
+
+.utterances {
+    max-width: 100%;
+}
+
 @media (max-width: 500px) {
     h1 {
         font-size: 3rem;

@@ -1,0 +1,16 @@
+---
+title: 'FitVids'
+date: '2023-11-30'
+tags: ['Web Components', 'Web Development', 'Development']
+commentIssueNumber: 174
+---
+
+On each one of my reading logs, I add a YouTube video for “A Song to Leave You With”. It uses a React component to render the embedded YouTube video. Thanks to [Dave Rupert](https://daverupert.com/), I’ve been able to improve it.
+
+The one thing I’ve had to deal with was handling different browser sizes. Suffice it to say, I only rendered the iFrame in 2 different sizes. It worked, but was, how shall we put it, sub-optimal. Recently I added a width selector as part of my custom themes for my site and the width issue on the embedded video reared its ugly head again.
+
+Dave recently posted about [FitVids having a web component](https://daverupert.com/2023/10/fitvids-has-a-web-component-now/) and all of a sudden the pieces clicked.
+
+Thanks to his `<fit-vids>` web component, my embedded YouTube videos now fit whatever screen they’re displayed on, at whatever width the user chooses on my site.
+
+Thanks Dave!
