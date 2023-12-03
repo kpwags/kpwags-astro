@@ -53,6 +53,13 @@ export const sortReadingLogs = (posts: CollectionEntry<'readinglogs'>[]): Collec
     return -1;
 });
 
+export const sortBookNotes = (bookNotes: CollectionEntry<'booknotes'>[]): CollectionEntry<'booknotes'>[] => bookNotes.sort((a: CollectionEntry<'booknotes'>, b: CollectionEntry<'booknotes'>) => {
+    if (a.data.dateFinished < b.data.dateFinished) {
+        return 1;
+    }
+    return -1;
+});
+
 export const sortAllPosts = (posts: CombinedPost[]): CombinedPost[] => posts.sort((a: CombinedPost, b: CombinedPost) => {
     if (a.date < b.date) {
         return 1;

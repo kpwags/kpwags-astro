@@ -26,7 +26,22 @@ const ReadingLogCollection = defineCollection({
     }),
 });
 
+const BookNotesCollection = defineCollection({
+    schema: z.object({
+        urlSlug: z.string(),
+        title: z.string(),
+        dateFinished: z.string().transform(str => new Date(str)),
+        author: z.string(),
+        categories: z.array(z.string()),
+        links: z.array(z.object({ title: z.string(), url: z.string() })),
+        rating: z.number(),
+        coverImage: z.string(),
+        commentIssueNumber: z.number().optional(),
+    }),
+});
+
 export const collections = {
     'blog': BlogPostCollection,
     'readinglogs': ReadingLogCollection,
+    'booknotes': BookNotesCollection,
 };

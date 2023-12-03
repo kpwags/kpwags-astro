@@ -1,0 +1,29 @@
+---
+import Star from '@components/icons/Star.astro';
+
+interface Props {
+    rating: number;
+}
+
+const { rating } = Astro.props;
+
+const getStars = () => {
+    const stars = [];
+
+    for (let i = 0; i < rating; i += 1) {
+        stars.push(i);
+    }
+
+    return stars;
+};
+---
+
+<div class="rating">
+    {getStars().map(() => <Star />)}
+</div>
+
+<style>
+    .rating {
+        margin: 0.6rem 0;
+    }
+</style>

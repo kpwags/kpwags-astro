@@ -1,0 +1,50 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BookNoteLink from '@components/BookNoteLink.astro';
+import { sortBookNotes } from '@lib/PostUtils';
+import { POSTS_PER_PAGE } from '@lib/constants';
+import Pagination from '@components/Pagination.astro';
+
+interface Props {
+    page: {
+        data: CollectionEntry<'booknotes'>[];
+        url: {
+            prev: string;
+            next: string;
+        };
+    };
+}
+
+export async function getStaticPaths({ paginate }: any) {
+    const bookNotes = await getCollection('booknotes');
+
+    const books = sortBookNotes(bookNotes);
+
+    return paginate(books, { pageSize: POSTS_PER_PAGE });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title="Book Notes">
+    <main>
+        <h1>Book Notes</h1>
+
+        {
+            page.data.map((note) => (
+                <BookNoteLink
+                    title={note.data.title}
+                    link={`/books/${note.data.urlSlug}`}
+                    dateFinished={note.data.dateFinished}
+                    author={note.data.author}
+                    rating={note.data.rating}
+                    categories={note.data.categories}
+                    imageUrl={note.data.coverImage}
+                />
+            ))
+        }
+
+        <Pagination previousLink={page.url.prev} previousLinkText="Newer" nextLink={page.url.next} nextLinkText="Older" />
+    </main>
+</Layout>

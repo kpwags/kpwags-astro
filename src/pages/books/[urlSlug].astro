@@ -1,0 +1,102 @@
+---
+import '@styles/book-notes.css';
+
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { formatDate } from '@lib/DateUtils';
+import StarRating from '@components/StarRating.astro';
+import Comments from '@components/Comments.astro';
+
+interface Props {
+    urlSlug: string;
+    title: string;
+    dateFinished: Date;
+    author: string;
+    content: any;
+    categories: string[];
+    links: { title: string; url: string }[];
+    rating: number;
+    coverImage: string;
+    commentIssueNumber?: number;
+}
+
+export async function getStaticPaths() {
+    const bookNotes = await getCollection('booknotes');
+
+    return bookNotes.map((bookNote) => {
+        return {
+            params: {
+                urlSlug: bookNote.data.urlSlug,
+            },
+            props: {
+                urlSlug: bookNote.data.urlSlug,
+                title: bookNote.data.title,
+                dateFinished: bookNote.data.dateFinished,
+                author: bookNote.data.author,
+                categories: bookNote.data.categories,
+                links: bookNote.data.links,
+                rating: bookNote.data.rating,
+                coverImage: bookNote.data.coverImage,
+                content: bookNote,
+                commentIssueNumber: bookNote.data.commentIssueNumber,
+            },
+        };
+    });
+}
+
+const { urlSlug, title, dateFinished, author, categories, links, rating, coverImage, content, commentIssueNumber = 0 } = Astro.props;
+
+const { Content } = await content.render();
+
+const socialImage = `/images/social-images/book-notes/${urlSlug}.jpg`;
+---
+
+<Layout title={title} description={`My notes for the book "${title}" by ${author}`} image={socialImage}>
+    <article class="book-note">
+        <div class="content">
+            <div class="metadata">
+                <div class="image">
+                    <img src={coverImage} alt={`${author} - ${title}`} />
+                </div>
+                <div>
+                    <h2>{title}</h2>
+                    <h3>{author}</h3>
+
+                    <div class="finished-reading"><strong>Finished</strong>: {formatDate(dateFinished)}</div>
+
+                    <StarRating rating={rating} />
+
+                    <div class="categories">
+                        {categories.map((c) => <span class="category">{c}</span>)}
+                    </div>
+
+                    <div class="links">
+                        <div>Links:</div>
+                        {
+                            links.map((link) => (
+                                <a href={link.url} target="_blank" rel="noreferrer nofollow">
+                                    {link.title}
+                                </a>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="book-notes">
+                <Content />
+            </div>
+        </div>
+    </article>
+
+    {
+        commentIssueNumber > 0 ? (
+            <>
+                <hr />
+                <Comments issueNumber={commentIssueNumber} />
+            </>
+        ) : null
+    }
+</Layout>

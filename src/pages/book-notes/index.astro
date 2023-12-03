@@ -1,0 +1,34 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import BookNoteLink from '@components/BookNoteLink.astro';
+import { sortBookNotes } from '@lib/PostUtils';
+import { POSTS_PER_PAGE } from '@lib/constants';
+import Pagination from '@components/Pagination.astro';
+
+const books = await getCollection('booknotes');
+
+const bookNotes = sortBookNotes(books).slice(0, POSTS_PER_PAGE);
+---
+
+<Layout title="Book Notes">
+    <main>
+        <h1>Book Notes</h1>
+
+        {
+            bookNotes.map((n) => (
+                <BookNoteLink
+                    title={n.data.title}
+                    link={`/books/${n.data.urlSlug}`}
+                    dateFinished={n.data.dateFinished}
+                    author={n.data.author}
+                    rating={n.data.rating}
+                    categories={n.data.categories}
+                    imageUrl={n.data.coverImage}
+                />
+            ))
+        }
+
+        {books.length > POSTS_PER_PAGE ? <Pagination nextLink="/book-notes/2" nextLinkText="Older" /> : null}
+    </main>
+</Layout>
