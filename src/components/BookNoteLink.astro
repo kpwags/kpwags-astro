@@ -1,0 +1,125 @@
+---
+import StarRating from './StarRating.astro';
+
+interface Props {
+    title: string;
+    dateFinished: Date;
+    author: string;
+    rating: number;
+    categories: string[];
+    imageUrl: string;
+    link: string;
+}
+
+const { title, dateFinished, author, rating, categories, imageUrl, link } = Astro.props;
+---
+
+<article class="book-note">
+    <div class="content">
+        <div class="image">
+            <img src={imageUrl} alt={`${author} - ${title}`} />
+        </div>
+        <div>
+            <h2><a href={link}>{title}</a></h2>
+            <h3>{author}</h3>
+
+            <StarRating rating={rating} />
+
+            <div class="categories">
+                {categories.map((c) => <span class="category">{c}</span>)}
+            </div>
+        </div>
+    </div>
+</article>
+
+<style>
+    .book-note {
+        margin: 2rem 0;
+        border: 1px solid var(--grey-1);
+        padding: 16px;
+        border-radius: 8px;
+        container-type: inline-size;
+    }
+
+    .book-note:hover {
+        border-color: var(--grey-2);
+        box-shadow: var(--box-shadow);
+    }
+
+    .metadata {
+        text-transform: uppercase;
+        font-style: italic;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid var(--grey-1);
+        background-color: var(--background-lighter);
+    }
+
+    .content {
+        display: flex;
+        gap: 32px;
+        padding: 16px;
+    }
+
+    .image {
+        min-width: 200px;
+    }
+
+    .book-note h2 {
+        font-size: 1.9rem;
+    }
+
+    .book-note h2 a {
+        text-decoration: none;
+    }
+
+    .book-note h2 a:hover {
+        text-decoration: underline;
+    }
+
+    .book-note h3 {
+        color: var(--text);
+        margin-bottom: 0.6rem;
+        font-size: 1.7rem;
+    }
+
+    .categories {
+        margin: 1rem 0;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .category {
+        padding: 0 1rem;
+        background-color: var(--primary-color-2);
+        color: var(--background);
+        border-radius: 0.25rem;
+    }
+
+    .date {
+        font-style: italic;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    @container (min-width: 600px) {
+        .content {
+            gap: 64px;
+        }
+    }
+
+    @media (max-width: 450px) {
+        .content {
+            display: block;
+        }
+
+        .image {
+            width: 200px;
+            margin: 0 auto 2rem;
+        }
+
+        .metadata {
+            text-align: center;
+        }
+    }
+</style>
