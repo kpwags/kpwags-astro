@@ -105,6 +105,20 @@ a img {
     max-width: 100%;
 }
 
+.about-page {
+    display: flex;
+    gap: 48px;
+}
+
+[data-width*='slim'] .about-page {
+    display: block;
+}
+
+[data-width*='slim'] .image {
+    width: 250px;
+    margin: 0 auto 32px;
+}
+
 @media (max-width: 500px) {
     h1 {
         font-size: 3rem;
@@ -128,5 +142,14 @@ a img {
 
     h6 {
         font-size: 1.166rem;
+    }
+
+    .about-page {
+        display: block;
+    }
+
+    .image {
+        width: 250px;
+        margin: 0 auto 32px;
     }
 }

@@ -166,7 +166,7 @@ import SettingsDrawer from './SettingsDrawer.astro';
 <script>
     import { getCurrentTheme, getPreferredColorMode } from '@lib/ConfigUtils';
 
-    const [mode, color] = getCurrentTheme();
+    const [mode, color, width] = getCurrentTheme();
 
     if (mode !== 'system') {
         document.documentElement.setAttribute('data-theme', mode);
@@ -175,6 +175,7 @@ import SettingsDrawer from './SettingsDrawer.astro';
     }
 
     document.documentElement.setAttribute('data-color-theme', color);
+    document.documentElement.setAttribute('data-width', width);
 
     window.addEventListener('load', () => {
         const openSettingsButton = document.querySelector('.open-settings-btn');

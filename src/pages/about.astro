@@ -1,0 +1,53 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import KeithImage from '../assets/images/keith.jpg';
+---
+
+<Layout title="About">
+    <h1>About</h1>
+    <article class="about-page">
+        <section class="image">
+            <Image src={KeithImage} alt="Me sitting drinking a beer" />
+        </section>
+        <section class="text">
+            <p>
+                Hi 👋🏻. My name is Keith, I'm a 30-something year old web developer living in the suburbs of Philadelphia, Pennsylvania. I graduated
+                from Drexel University in 2007 with my Bachelor's Degree in Computer Science and have since spent my career working on both front-end
+                and back-end development with a specialty in the .NET ecosystem. I am fortunate to have found a career where I can do what I love
+                doing. Seeing websites and applications come to life is such an awesome thing, even more so when you're the one building them.
+            </p>
+
+            <p>
+                This site is my little oasis within the wide world of the internet. I often write about things I read or hear, challenges I find, and
+                a variety of things going on in my busy life. I also do my best to keep a <a href="/reading-logs">weekly reading log</a> of what I
+                read and listen to.
+            </p>
+
+            <p>
+                I have a wide variety of interests which always keeps me busy. Some of them include: software development, photography, writing,
+                hockey, running, cooking, drawing, video games, and more. In reality, it's too much to constantly keep up with, but I stumble through.
+            </p>
+        </section>
+    </article>
+</Layout>
+
+<style>
+    .image {
+        flex-grow: 1;
+        min-width: 250px;
+        margin-top: 12px;
+    }
+
+    .image img {
+        border-radius: 10px;
+    }
+
+    .text {
+        flex-grow: 2;
+    }
+
+    .text p {
+        margin-top: 0;
+    }
+</style>
