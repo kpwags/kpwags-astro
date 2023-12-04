@@ -1,0 +1,43 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getArchivesList } from '@lib/PostUtils';
+import { getCollection } from 'astro:content';
+
+const blogEntries = await getCollection('blog');
+const readingLogs = await getCollection('readinglogs');
+
+const archivesList = getArchivesList(blogEntries, readingLogs);
+---
+
+<Layout title="Archives">
+    <h1>Archives</h1>
+
+    {
+        archivesList.map((a) => (
+            <>
+                <h2>
+                    <a href={`/archives/${a.year}`}>{a.year}</a>
+                </h2>
+
+                <ul class="archives-list">
+                    {a.items.map((item) => (
+                        <li>
+                            <a href={item.url}>{item.monthYear}</a>
+                        </li>
+                    ))}
+                </ul>
+            </>
+        ))
+    }
+</Layout>
+
+<style>
+    ul.archives-list {
+        margin-left: 2rem;
+    }
+
+    ul.archives-list li {
+        list-style-type: none;
+        margin: 0.75rem 0;
+    }
+</style>

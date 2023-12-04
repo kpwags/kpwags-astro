@@ -1,6 +1,8 @@
 import type { CombinedPost } from '@models/CombinedPost';
 import markdown from '@lib/drawdown';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { formatDate, getDateParts } from './DateUtils';
+import type { Archives } from '@models/Archives';
 
 export const getPublicPosts = async (): Promise<CollectionEntry<'blog'>[]> => {
     const posts = await getCollection('blog');
@@ -116,3 +118,66 @@ export const combineBlogAndReadingLog = (blogEntries: CollectionEntry<'blog'>[],
         })),
     ]);
 };
+
+export const getPostYears = (blogEntries: CollectionEntry<'blog'>[], readingLogs: CollectionEntry<'readinglogs'>[]): number[] => {
+    const posts = combineBlogAndReadingLog(blogEntries, readingLogs);
+
+    const archiveYears: number[] = [];
+
+    // get unique years
+    posts.forEach((post) => {
+        const dateParts = getDateParts(post.date);
+        const archiveYear = parseInt(dateParts.year, 10);
+
+        archiveYears.push(archiveYear);
+    });
+
+    const years: number[] = [...new Set(archiveYears)];
+
+    return years;
+};
+
+export const getArchivesList = (blogEntries: CollectionEntry<'blog'>[], readingLogs: CollectionEntry<'readinglogs'>[]): Archives[] => {
+    const archives: Archives[] = [];
+
+    const posts = combineBlogAndReadingLog(blogEntries, readingLogs);
+
+    const years: number[] = getPostYears(blogEntries, readingLogs);
+
+    years.forEach((year) => {
+        archives.push({ year, items: [] });
+    })
+
+    posts.forEach((post) => {
+        const monthYear = formatDate(post.date, 'MMMM YYYY');
+        const dateParts = getDateParts(post.date);
+        const archiveYear = parseInt(dateParts.year, 10);
+
+        const archive = archives.find(a => a.year === archiveYear);
+
+        if (archive) {
+            if (archive.items.filter(a => a.monthYear === monthYear).length === 0) {
+                archive.items.push({ monthYear, url: `/archives/${dateParts.year}/${dateParts.month}` });
+            }
+        }
+    });
+
+    return archives;
+};
+
+export const getYearMonthData = (years: number[]): { year: number; month: number; }[] => {
+    const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+
+    const yearMonths: { year: number; month: number; }[] = [];
+
+    years.map((year) => {
+        months.map((month) => {
+            yearMonths.push({
+                year,
+                month: parseInt(month, 10),
+            })
+        });
+    });
+
+    return yearMonths;
+}
