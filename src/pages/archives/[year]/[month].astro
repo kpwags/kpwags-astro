@@ -1,0 +1,55 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import type { CombinedPost } from '@models/CombinedPost';
+import BlogLink from '@components/PostLink.astro';
+import { getPostYears, combineBlogAndReadingLog, getYearMonthData } from '@lib/PostUtils';
+import { getDateParts, getMonthName } from '@lib/DateUtils';
+
+interface Props {
+    posts: CombinedPost[];
+    year: number;
+    month: string;
+}
+
+export async function getStaticPaths() {
+    const blogEntries = await getCollection('blog');
+    const readingLogs = await getCollection('readinglogs');
+
+    const years = getPostYears(blogEntries, readingLogs);
+
+    const yearMonths = getYearMonthData(years);
+
+    return yearMonths.map(({ year, month }) => ({
+        params: {
+            year,
+            month,
+        },
+        props: {
+            year,
+            month: getMonthName(month),
+            posts: combineBlogAndReadingLog(
+                blogEntries.filter(
+                    (blog) => parseInt(getDateParts(blog.data.date).year) === year && parseInt(getDateParts(blog.data.date).month) === month,
+                ),
+                readingLogs.filter(
+                    (log) => parseInt(getDateParts(log.data.date).year) === year && parseInt(getDateParts(log.data.date).month) === month,
+                ),
+            ),
+        },
+    }));
+}
+
+const { posts, month, year } = Astro.props;
+---
+
+<Layout title={`Archives: Posts in ${month} ${year}`}>
+    <h1>Posts in {month} {year}</h1>
+    {posts.map((post) => <BlogLink title={post.title} link={post.link} date={post.date} excerpt={post.excerpt} />)}
+</Layout>
+
+<style>
+    h1 {
+        font-size: 3.75rem;
+    }
+</style>
