@@ -181,3 +181,28 @@ export const getYearMonthData = (years: number[]): { year: number; month: number
 
     return yearMonths;
 }
+
+export const getUniqueTags = (blogEntries: CollectionEntry<'blog'>[], readingLogs: CollectionEntry<'readinglogs'>[]): { name: string; url: string }[] => {
+    let tagArray: { name: string; url: string }[] = [];
+
+    blogEntries.forEach((blog) => {
+        blog.data.tags.forEach((tag: string) => {
+            tagArray.push({ name: tag, url: generateTagUrl(tag) });
+        });
+    });
+
+    readingLogs.forEach((log) => {
+        log.data.tags.forEach((tag: string) => {
+            tagArray.push({ name: tag, url: generateTagUrl(tag) });
+        });
+    });
+
+    const uniqueTagUrls = [...new Set(tagArray.map((t) => t.url))];
+
+    const uniqueTags = uniqueTagUrls.map((url) => ({
+        name: tagArray.find((tag) => tag.url === url)?.name ?? '',
+        url,
+    }));
+
+    return uniqueTags;
+};

@@ -17,7 +17,7 @@ const { content, name, date, link, profileLink, source = 'other' } = Astro.props
 
 <div class="embedded-post">
     <blockquote class="post">
-        <p>{content}</p>
+        <div class="content"><slot /></div>
         <div class="credit">
             <div class="author">(<a href={profileLink} target="_blank">{name}</a>) <a href={link} target="_blank">{date}</a></div>
             {
